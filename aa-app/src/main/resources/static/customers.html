@@ -1,0 +1,193 @@
+<DOCTYPE html>
+    <head>
+        <title>Allgegiant-Air-Demo</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+        <!-- bootstrap -->
+        <link rel="stylesheet" type="text/css"
+              href="webjars/bootstrap/3.3.7/css/bootstrap.min.css"/>
+
+        <!-- ajax and jquery -->
+        <script type="text/javascript"
+                src="webjars/jquery/2.2.4/jquery.min.js"></script>
+
+        <!-- Datatable web scripts and css -->
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+
+        <script>
+                $(document).ready( function () {
+                    $('#customersTable').DataTable();
+                    $.ajax({
+                        url : '/customers/getAllCustomers',
+                        success : function(data) {
+                            $('#customersTable').DataTable().destroy();
+                            // formats the data for the table
+                            dtData = formatData(data);
+
+                            // initializes the table with data
+                            $('#customersTable').DataTable( {
+                                autoWidth: true,
+                                lengthMenu: [[10, 50, 100, 500, 1000, -1], [10, 50, 100, 500, 1000, "All"]],
+                                data: dtData
+                            });
+                        }
+                    });
+                    $('#customersTable').DataTable();
+
+                    function formatData(data) {
+                        let dtData = [];
+                        let columns = [];
+                        for(var i=0; i<data.length; i++) {
+                            columns = [];
+                            columns.push(checkNullValue(data[i].id));
+                            columns.push(checkNullValue(data[i].email));
+                            columns.push(checkNullValue(data[i].firstName));
+                            columns.push(checkNullValue(data[i].lastName));
+                            columns.push(checkNullValue(data[i].ip));
+                            columns.push(checkNullValue(data[i].latitude));
+                            columns.push(checkNullValue(data[i].longitude));
+                            columns.push(checkNullValue(data[i].updatedAt));
+                            columns.push(checkNullValue(data[i].createdAt));
+                            dtData.push(columns);
+                        }
+
+                        return dtData;
+                    }
+                    function checkNullValue(value) {
+                        return (typeof value !== '' && value !== null) ? value : "N/A";
+                    }
+                });
+        </script>
+
+        <style>
+                #customersTable_wrapper {
+                    margin-top: 25px !important;
+                }
+                .nav-top {
+                    width: 100%;
+                    height: 105px;
+                    background: #00579c;
+                    box-sizing: border-box;
+                    box-shadow: 0 1px 0 0 #1976d2, 0 2px 5px 0 rgba(0,0,0,.4);
+                }
+                .header {
+                    border-bottom: solid 2px black;
+                    margin-bottom:50px;
+                    margin-left:-15px;
+                }
+                .logo {
+                    float: left;
+                    margin-left: -60px;
+                }
+                .card-wrapper {
+                    background-color: white;
+                    border: solid 1px #ddd;
+                    padding:5px;
+                }
+                .button-wrapper-left {
+                    float:left;
+                }
+                .button-wrapper-right {
+                    float:right;
+                }
+                body {
+                  font-family: "Lato", sans-serif;
+                  background-color: #f7f9fa;
+                }
+                .sidenav {
+                  height: 100%;
+                  width: 10%;
+                  position: fixed;
+                  top: 11%;
+                  left: 0;
+                  background-color: #ffffff;
+                  overflow-x: hidden;
+                  transition: 0.5s;
+                  padding-top: 1%;
+                  border-top: solid 8px orange;
+                }
+                .sidenav a {
+                  padding: 8px 8px 8px 32px;
+                  text-decoration: none;
+                  font-size: 20px;
+                  font-weight: bold;
+                  color: #3f6ad8;
+                  display: block;
+                  transition: 0.3s;
+                  z-index: 100;
+                }
+                .sidenav a:hover {
+                  background: #e0f3ff;
+                  cursor: pointer;
+                }
+                .sidenav a:active {
+                  color: #3f6ad8;
+                }
+        </style>
+    </head>
+    <body>
+        <!-- Nav -->
+        <div class="nav-top">
+            <div class="logo">
+                <img src="images/logo.jpeg" width="280px" height="105px">
+            </div>
+        </div>
+
+        <!-- sidebar -->
+        <div id="mySidenav" class="sidenav">
+            <a href="profile.html">Profile</a>
+            <a href="/customers.html">Customers</a>
+            <a href="/index.html">Dashboard</a>
+        </div>
+
+        <!-- main container -->
+        <div class="container" style="min-height: 500px">
+            <div class="starter-template header">
+                <h1>Demo Customer Table</h1>
+            </div>
+            <div class="row card-wrapper">
+                <div class="cold-md-12">
+                    <div class="button-wrapper-left">
+                        <button type="button" id="addNewCustomerButton" class="btn btn-primary">Add New Customer</button>
+                        <button type="button" id="refreshTableButton" class="btn btn-primary">Refresh Table</button>
+                    </div>
+                    <div class="button-wrapper-right">
+                        <button type="button" class="btn btn-danger">Drop Table</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <table id="customersTable" class="display card-wrapper">
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>E-Mail</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>IP</th>
+                        <th>Latitude</th>
+                        <th>Longitude</th>
+                        <th>Created At</th>
+                        <th>Updated At</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+</DOCTYPE>

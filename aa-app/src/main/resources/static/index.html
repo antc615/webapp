@@ -1,0 +1,282 @@
+<DOCTYPE html>
+    <head>
+        <title>Allgegiant-Air-Demo</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+        <!-- bootstrap -->
+        <link rel="stylesheet" type="text/css"
+              href="webjars/bootstrap/3.3.7/css/bootstrap.min.css"/>
+
+        <!-- ajax and jquery -->
+        <script type="text/javascript"
+                src="webjars/jquery/2.2.4/jquery.min.js"></script>
+
+        <!-- Datatable web scripts and css -->
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+
+        <!-- stylesheet -->
+        <style>
+                body {
+                    font-family: "Lato", sans-serif;
+                    background-color: #f7f9fa;
+                }
+                #customersTable_wrapper {
+                    margin-top: 25px !important;
+                }
+                .nav-top {
+                    width: 100%;
+                    height: 105px;
+                    background: #00579c;
+                    box-sizing: border-box;
+                    box-shadow: 0 1px 0 0 #1976d2, 0 2px 5px 0 rgba(0,0,0,.4);
+                }
+                .header {
+                    border-bottom: solid 2px black;
+                    margin-bottom:5px;
+                    margin-left:-15px;
+                }
+                .logo {
+                    float: left;
+                    margin-left: -60px;
+                }
+                .header {
+                        border-bottom: solid 2px black;
+                        margin-bottom:50px;
+                        margin-left:-15px;
+                }
+                .starter-template-header {
+                    background: rgba(255,255,255,0.45);
+                }
+                .sidenav {
+                      height: 100%;
+                      width: 10%;
+                      position: fixed;
+                      top: 11%;
+                      left: 0;
+                      background-color: #ffffff;
+                      overflow-x: hidden;
+                      transition: 0.5s;
+                      padding-top: 1%;
+                      border-top: solid 8px orange;
+                }
+                .sidenav a {
+                  padding: 8px 8px 8px 32px;
+                  text-decoration: none;
+                  font-size: 20px;
+                  font-weight: bold;
+                  color: #3f6ad8;
+                  display: block;
+                  transition: 0.3s;
+                  z-index: 100;
+                }
+                .sidenav a:hover {
+                  background: #e0f3ff;
+                  cursor: pointer;
+                }
+                .sidenav a:active {
+                  color: #3f6ad8;
+                }
+                .header-wrap {
+                    display: -webkit-inline-box;
+                }
+                .dropdown-menu-header-inner {
+
+                }
+                .profile-pic-wrap {
+                    width: 10%;
+                    display: inline;
+                    margin-left: 25px;
+                }
+                .header-text-wrap {
+                    width: 90%;
+                    margin-left: 25px;
+                }
+                 .profile-pic-wrap img {
+                    border-radius: 100px;
+                }
+                .menu-header-title {
+                    font-weigh: 500;
+                    margin: 0;
+                    color: white;
+                    display:inherit;
+                    font-size: 25px;
+                }
+                .menu-header-subtitle {
+                    font-weigh: 500;
+                    margin-top: 5px;
+                    opacity: 0.8;
+                    color: white;
+                    display:inline-block;
+                    font-size: 18px;
+                }
+                .bg-dark-gradient {
+                    background-image: linear-gradient(to top left, #99bbe4, #00579c);
+                }
+                .dropdown-menu-header-inner {
+                  padding: 5px;
+                }
+                .list-group {
+                    display: grid;
+                }
+                .group-header-text {
+                    border-bottom: solid 1px black;
+                }
+                .orders-header {
+                    margin-left: 15px;
+                    margin-right: 15px;
+                    color: white;
+                    padding: 10px;
+                    background-image: linear-gradient(to top left, #99bbe4, #00579c);
+                }
+                #customerOrdersTable_wrapper {
+                    margin-right: 15px;
+                    margin-left: 15px;
+                    border: 1px solid #ddd;
+                    background-color: white;
+                    padding: 10px;
+                }
+
+                .title-wrap {
+                    border: solid 1px #ddd;
+                    padding:10px;
+                }
+                .header-title {
+                    font-size: 24px;
+                    color: rgba(13,27,62,0.7);
+                    margin-left: 20px;
+                    width: 90%;
+                    display: inline-block;
+                }
+                .header-button {
+                    display: inline;
+                }
+                .header-info-pane {
+                    border:solid 1px #ddd;
+                }
+                .no-gutters {
+                    margin-left: 0;
+                    margin-right: 0;
+                }
+                .border-gray {
+                    border:solid 1px #ddd;
+                }
+                .text-center {
+                    text-align: center;
+                }
+                .bg-white {
+                    background-color:white;
+                }
+                .card-footer {
+                    display: flex;
+                    padding-top: 13px;
+                    padding-bottom: 13px;
+                    padding-left: 38%;
+                }
+                .card-container {
+                    border: solid 1px #ddd;
+                    height: 400px;
+                }
+                .mt-15 {
+                    margin-top: 15px;
+                }
+                .no-side-padding {
+                    padding-left: 0px !important;
+                    padding-right: 0px !important;
+                }
+                .chart-title {
+                    font-size: 30px;
+                    padding: 5px;
+                    border-bottom: solid 1px #ddd;
+                }
+                .bb-green {
+                    border-bottom: solid 5px #3ac47d;
+                }
+                .bb-blue {
+                    border-bottom: solid 5px #3f6ad8;
+                }
+                .bb-yellow {
+                    border-bottom: solid 5px #f7b924;
+                }
+                .bb-red {
+                    border-bottom: solid 5px #d92550
+                }
+        </style>
+        <script>
+             $(document).ready( function () {
+                $('#customerOrdersTable').DataTable();
+            });
+        </script>
+    </head>
+    <body>
+    <!-- Nav -->
+    <div class="nav-top">
+        <div class="logo">
+            <img src="images/logo.jpeg" width="280px" height="105px">
+        </div>
+    </div>
+
+    <!-- sidebar -->
+    <div id="mySidenav" class="sidenav">
+        <a href="/profile.html">Profile</a>
+        <a href="/customers.html">Customers</a>
+        <a href="/index.html">Dashboard</a>
+    </div>
+
+    <!-- main container -->
+    <div class="container" style="min-height: 500px">
+        <div class="row">
+            <div class="starter-template header">
+                <h1>Dashboard</h1>
+            </div>
+        </div>
+
+        <div class="card row bg-white">
+            <div class="cold-md-12 title-wrap">
+                <div class="header-title">Customer Income Statement</div>
+                <div class="header-button">
+                    <button class="btn btn-default btn-md">View</button>
+                </div>
+            </div>
+            <!-- row -->
+            <div class="col-md-12 no-gutters">
+                <div class="row header-info-pane">
+                    <div class="card bg-transparent text-left">
+                        <img src="images/dummy-data.jpg">
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer border-gray card-footer">
+                <button class="btn-pill btn-shadow btn-wide fsize-1 btn btn-primary btn-lg">View Complete Report</button>
+            </div>
+        </div>
+
+        <div class="row mt-15">
+            <div class="col-sm-3 no-side-padding bg-white">
+                <div class="card card-container bb-green">
+                    <h1 class="chart-title">Sales</h1>
+                    <img src="images/chart1.jpg">
+                </div>
+            </div>
+            <div class="col-sm-3 no-side-padding bg-white">
+                <div class="card card-container bb-blue">
+                    <h1 class="chart-title">Income</h1>
+                    <img src="images/chart2.jpg">
+                </div>
+            </div>
+            <div class="col-sm-3 no-side-padding bg-white">
+                <div class="card card-container bb-yellow">
+                    <h1 class="chart-title">Gross</h1>
+                    <img src="images/chart3.jpg">
+                </div>
+            </div>
+            <div class="col-sm-3 no-side-padding bg-white">
+                <div class="card card-container bb-red">
+                    <h1 class="chart-title">Profit</h1>
+                    <img src="images/chart4.jpg">
+                </div>
+            </div>
+        </div>
+    </div>
+    </body>
+</DOCTYPE>
